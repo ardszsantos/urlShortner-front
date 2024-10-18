@@ -16,7 +16,7 @@ const MainPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/url', { longUrl });
+      const response = await axios.post('https://urlshortner-back.onrender.com/url', { longUrl });
       setShortUrl(response.data);
     } catch (error) {
       console.error('Error creating short URL:', error);
@@ -24,9 +24,9 @@ const MainPage = () => {
   };
 
   return (
-    <div className="container vh-100 d-flex flex-column justify-content-center align-items-center">
+    <div className="app container vh-100 d-flex flex-column justify-content-center align-items-center px-3">
       <h1 className="text-center mb-4">URL Shortener</h1>
-      <form onSubmit={handleSubmit} className="w-50">
+      <form onSubmit={handleSubmit} className="w-100 w-md-75 w-lg-50">
         <div className="input-group mb-3">
           <input
             type="text"
@@ -42,7 +42,7 @@ const MainPage = () => {
       </form>
 
       {shortUrl && (
-        <div className="input-group mt-4 w-50">
+        <div className="input-group mt-4 w-100 w-md-75 w-lg-50">
           <input
             type="text"
             className="form-control rounded-pill"
