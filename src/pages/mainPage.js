@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaCopy } from 'react-icons/fa';
+import { MdDarkMode, MdLightMode } from 'react-icons/md';  // Import icons for the toggler
+import { useTheme } from '../ThemeProvider';  // Use theme from ThemeProvider
 
 const MainPage = () => {
   const [longUrl, setLongUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
+  const { theme, toggleTheme } = useTheme();  // Destructure theme and toggleTheme
 
   // Function to copy the short URL to the clipboard
   const copyToClipboard = () => {
@@ -24,7 +27,10 @@ const MainPage = () => {
   };
 
   return (
-    <div className="app container vh-100 d-flex flex-column justify-content-center align-items-center px-3">
+    <div className="app container-fluid vh-100 d-flex flex-column justify-content-center align-items-center px-3">
+      <div className="theme-toggler" onClick={toggleTheme} style={{ cursor: 'pointer' }}>
+        {theme === 'light' ? <MdDarkMode size={30} /> : <MdLightMode size={30} />}
+      </div>
       <h1 className="text-center mb-4">URL Shortener</h1>
       <form onSubmit={handleSubmit} className="w-100 w-md-75 w-lg-50">
         <div className="input-group mb-3">
@@ -40,7 +46,6 @@ const MainPage = () => {
           </button>
         </div>
       </form>
-
       {shortUrl && (
         <div className="input-group mt-4 w-100 w-md-75 w-lg-50">
           <input
@@ -56,6 +61,7 @@ const MainPage = () => {
       )}
     </div>
   );
+  
 };
 
 export default MainPage;
